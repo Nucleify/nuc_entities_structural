@@ -14,668 +14,380 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedLinkData = updatedLinkData) {
-    /**
-     * DOWNLOAD TESTS
-     */
-    $updatedLinkData['download'] = 1;
-    test('download > int', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['download']],
-        ['errors' => [
-            'download' => ['The download field must be a string.'],
-        ]]
-    ));
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // DOWNLOAD TESTS
+        'download > int' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['download' => 1]),
+            'structure' => ['errors' => ['download']],
+            'fragment' => ['errors' => ['download' => ['The download field must be a string.']]],
+        ],
+        'download > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['download' => false]),
+            'structure' => ['errors' => ['download']],
+            'fragment' => ['errors' => ['download' => ['The download field must be a string.']]],
+        ],
 
-    $updatedLinkData['download'] = false;
-    test('download > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['download']],
-        ['errors' => [
-            'download' => ['The download field must be a string.'],
-        ]]
-    ));
+        // HREF TESTS
+        'href > empty' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['href' => '']),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field is required.']]],
+        ],
+        'href > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['href' => 1]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.', 'The href field must be a valid URL.']]],
+        ],
+        'href > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['href' => false]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.', 'The href field must be a valid URL.']]],
+        ],
+        'href > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['href' => true]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.', 'The href field must be a valid URL.']]],
+        ],
+        'href > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['href' => []]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field is required.']]],
+        ],
 
-    $updatedLinkData['download'] = updatedLinkData['download'];
+        // CATEGORY TESTS
+        'content > empty' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['category' => '']),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field is required.']]],
+        ],
+        'category > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field is required.']]],
+        ],
 
-    /**
-     * HREF TESTS
-     */
-    $updatedLinkData['href'] = '';
-    test('href > empty', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => ['The href field is required.'],
-        ]]
-    ));
+        // SRC TESTS
+        'src > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['src' => 1]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.', 'The src field must be a valid URL.']]],
+        ],
+        'src > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['src' => false]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.', 'The src field must be a valid URL.']]],
+        ],
+        'src > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['src' => true]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.', 'The src field must be a valid URL.']]],
+        ],
+        'src > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['src' => []]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.', 'The src field must be a valid URL.']]],
+        ],
 
-    $updatedLinkData['href'] = 1;
-    test('href > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-                'The href field must be a valid URL.',
-            ],
-        ]]
-    ));
+        // ICON TESTS
+        'icon > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['icon' => 1]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['icon' => false]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['icon' => true]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['icon' => []]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
 
-    $updatedLinkData['href'] = false;
-    test('href > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-                'The href field must be a valid URL.',
-            ],
-        ]]
-    ));
+        // HREFLANG TESTS
+        'hreflang > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['hreflang' => 1]),
+            'structure' => ['errors' => ['hreflang']],
+            'fragment' => ['errors' => ['hreflang' => ['The hreflang field must be a string.']]],
+        ],
+        'hreflang > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['hreflang' => false]),
+            'structure' => ['errors' => ['hreflang']],
+            'fragment' => ['errors' => ['hreflang' => ['The hreflang field must be a string.']]],
+        ],
+        'hreflang > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['hreflang' => true]),
+            'structure' => ['errors' => ['hreflang']],
+            'fragment' => ['errors' => ['hreflang' => ['The hreflang field must be a string.']]],
+        ],
+        'hreflang > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['hreflang' => []]),
+            'structure' => ['errors' => ['hreflang']],
+            'fragment' => ['errors' => ['hreflang' => ['The hreflang field must be a string.']]],
+        ],
 
-    $updatedLinkData['href'] = true;
-    test('href > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-                'The href field must be a valid URL.',
-            ],
-        ]]
-    ));
+        // MEDIA TESTS
+        'media > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['media' => 1]),
+            'structure' => ['errors' => ['media']],
+            'fragment' => ['errors' => ['media' => ['The media field must be a string.']]],
+        ],
+        'media > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['media' => false]),
+            'structure' => ['errors' => ['media']],
+            'fragment' => ['errors' => ['media' => ['The media field must be a string.']]],
+        ],
+        'media > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['media' => true]),
+            'structure' => ['errors' => ['media']],
+            'fragment' => ['errors' => ['media' => ['The media field must be a string.']]],
+        ],
+        'media > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['media' => []]),
+            'structure' => ['errors' => ['media']],
+            'fragment' => ['errors' => ['media' => ['The media field must be a string.']]],
+        ],
 
-    $updatedLinkData['href'] = [];
-    test('href > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => ['The href field is required.'],
-        ]]
-    ));
+        // PING TESTS
+        'ping > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['ping' => 1]),
+            'structure' => ['errors' => ['ping']],
+            'fragment' => ['errors' => ['ping' => ['The ping field must be a string.']]],
+        ],
+        'ping > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['ping' => false]),
+            'structure' => ['errors' => ['ping']],
+            'fragment' => ['errors' => ['ping' => ['The ping field must be a string.']]],
+        ],
+        'ping > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['ping' => true]),
+            'structure' => ['errors' => ['ping']],
+            'fragment' => ['errors' => ['ping' => ['The ping field must be a string.']]],
+        ],
+        'ping > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['ping' => []]),
+            'structure' => ['errors' => ['ping']],
+            'fragment' => ['errors' => ['ping' => ['The ping field must be a string.']]],
+        ],
 
-    $updatedLinkData['href'] = updatedLinkData['href'];
+        // REL TESTS
+        'rel > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['rel' => 1]),
+            'structure' => ['errors' => ['rel']],
+            'fragment' => ['errors' => ['rel' => ['The rel field must be a string.', 'The selected rel is invalid.']]],
+        ],
+        'rel > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['rel' => false]),
+            'structure' => ['errors' => ['rel']],
+            'fragment' => ['errors' => ['rel' => ['The rel field must be a string.', 'The selected rel is invalid.']]],
+        ],
+        'rel > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['rel' => true]),
+            'structure' => ['errors' => ['rel']],
+            'fragment' => ['errors' => ['rel' => ['The rel field must be a string.', 'The selected rel is invalid.']]],
+        ],
+        'rel > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['rel' => []]),
+            'structure' => ['errors' => ['rel']],
+            'fragment' => ['errors' => ['rel' => ['The rel field must be a string.', 'The selected rel is invalid.']]],
+        ],
 
-    /**
-     * CATEGORY TESTS
-     */
-    $updatedLinkData['category'] = '';
-    test('content > empty', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field is required.'],
-        ]]
-    ));
+        // TARGET TESTS
+        'target > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['target' => 1]),
+            'structure' => ['errors' => ['target']],
+            'fragment' => ['errors' => ['target' => ['The selected target is invalid.', 'The target field must be a string.']]],
+        ],
+        'target > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['target' => false]),
+            'structure' => ['errors' => ['target']],
+            'fragment' => ['errors' => ['target' => ['The selected target is invalid.', 'The target field must be a string.']]],
+        ],
+        'target > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['target' => true]),
+            'structure' => ['errors' => ['target']],
+            'fragment' => ['errors' => ['target' => ['The selected target is invalid.', 'The target field must be a string.']]],
+        ],
+        'target > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['target' => []]),
+            'structure' => ['errors' => ['target']],
+            'fragment' => ['errors' => ['target' => ['The selected target is invalid.', 'The target field must be a string.']]],
+        ],
 
-    $updatedLinkData['category'] = 1;
-    test('category > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['category'] = false;
-    test('category > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['category'] = true;
-    test('category > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['category'] = [];
-    test('category > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field is required.'],
-        ]]
-    ));
-
-    $updatedLinkData['category'] = updatedLinkData['category'];
-
-    /**
-     * SRC TESTS
-     */
-    $updatedLinkData['src'] = 1;
-    test('src > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-                'The src field must be a valid URL.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['src'] = false;
-    test('src > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-                'The src field must be a valid URL.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['src'] = true;
-    test('src > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-                'The src field must be a valid URL.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['src'] = [];
-    test('src > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-                'The src field must be a valid URL.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['src'] = updatedLinkData['src'];
-
-    /**
-     * ICON TESTS
-     */
-    $updatedLinkData['icon'] = 1;
-    test('icon > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['icon'] = false;
-    test('icon > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['icon'] = true;
-    test('icon > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['icon'] = [];
-    test('icon > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => ['The icon field must be a string.'],
-        ]]
-    ));
-
-    $updatedLinkData['icon'] = updatedLinkData['icon'];
-
-    /**
-     * HREFLANG TESTS
-     */
-    $updatedLinkData['hreflang'] = 1;
-    test('hreflang > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['hreflang']],
-        ['errors' => [
-            'hreflang' => [
-                'The hreflang field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['hreflang'] = false;
-    test('hreflang > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['hreflang']],
-        ['errors' => [
-            'hreflang' => [
-                'The hreflang field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['hreflang'] = true;
-    test('hreflang > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['hreflang']],
-        ['errors' => [
-            'hreflang' => [
-                'The hreflang field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['hreflang'] = [];
-    test('hreflang > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['hreflang']],
-        ['errors' => [
-            'hreflang' => ['The hreflang field must be a string.'],
-        ]]
-    ));
-
-    $updatedLinkData['hreflang'] = updatedLinkData['hreflang'];
-
-    /**
-     * MEDIA TESTS
-     */
-    $updatedLinkData['media'] = 1;
-    test('media > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['media']],
-        ['errors' => [
-            'media' => [
-                'The media field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['media'] = false;
-    test('media > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['media']],
-        ['errors' => [
-            'media' => [
-                'The media field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['media'] = true;
-    test('media > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['media']],
-        ['errors' => [
-            'media' => [
-                'The media field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['media'] = [];
-    test('media > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['media']],
-        ['errors' => [
-            'media' => ['The media field must be a string.'],
-        ]]
-    ));
-
-    $updatedLinkData['media'] = updatedLinkData['media'];
-
-    /**
-     * PING TESTS
-     */
-    $updatedLinkData['ping'] = 1;
-    test('ping > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['ping']],
-        ['errors' => [
-            'ping' => [
-                'The ping field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['ping'] = false;
-    test('ping > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['ping']],
-        ['errors' => [
-            'ping' => [
-                'The ping field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['ping'] = true;
-    test('ping > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['ping']],
-        ['errors' => [
-            'ping' => [
-                'The ping field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['ping'] = [];
-    test('ping > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['ping']],
-        ['errors' => [
-            'ping' => ['The ping field must be a string.'],
-        ]]
-    ));
-
-    $updatedLinkData['ping'] = updatedLinkData['ping'];
-
-    /**
-     * REL TESTS
-     */
-    $updatedLinkData['rel'] = 1;
-    test('rel > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['rel']],
-        ['errors' => [
-            'rel' => [
-                'The rel field must be a string.',
-                'The selected rel is invalid.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['rel'] = false;
-    test('rel > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['rel']],
-        ['errors' => [
-            'rel' => [
-                'The rel field must be a string.',
-                'The selected rel is invalid.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['rel'] = true;
-    test('rel > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['rel']],
-        ['errors' => [
-            'rel' => [
-                'The rel field must be a string.',
-                'The selected rel is invalid.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['rel'] = [];
-    test('rel > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['rel']],
-        ['errors' => [
-            'rel' => [
-                'The rel field must be a string.',
-                'The selected rel is invalid.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['rel'] = updatedLinkData['rel'];
-
-    /**
-     * TARGET TESTS
-     */
-    $updatedLinkData['target'] = 1;
-    test('target > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['target']],
-        ['errors' => [
-            'target' => [
-                'The selected target is invalid.',
-                'The target field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['target'] = false;
-    test('target > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['target']],
-        ['errors' => [
-            'target' => [
-                'The selected target is invalid.',
-                'The target field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['target'] = true;
-    test('target > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['target']],
-        ['errors' => [
-            'target' => [
-                'The selected target is invalid.',
-                'The target field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['target'] = [];
-    test('target > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['target']],
-        ['errors' => [
-            'target' => [
-                'The selected target is invalid.',
-                'The target field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['target'] = updatedLinkData['target'];
-
-    /**
-     * TYPE TESTS
-     */
-    $updatedLinkData['type'] = 1;
-    test('type > integer', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['type']],
-        ['errors' => [
-            'type' => [
-                'The type field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['type'] = false;
-    test('type > false', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['type']],
-        ['errors' => [
-            'type' => [
-                'The type field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['type'] = true;
-    test('type > true', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['type']],
-        ['errors' => [
-            'type' => [
-                'The type field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedLinkData['type'] = [];
-    test('type > empty array', apiTest(
-        'PUT',
-        'links.update',
-        422,
-        $updatedLinkData,
-        ['errors' => ['type']],
-        ['errors' => [
-            'type' => ['The type field must be a string.'],
-        ]]
-    ));
-
-    $updatedLinkData['type'] = updatedLinkData['type'];
+        // TYPE TESTS
+        'type > integer' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['type' => 1]),
+            'structure' => ['errors' => ['type']],
+            'fragment' => ['errors' => ['type' => ['The type field must be a string.']]],
+        ],
+        'type > false' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['type' => false]),
+            'structure' => ['errors' => ['type']],
+            'fragment' => ['errors' => ['type' => ['The type field must be a string.']]],
+        ],
+        'type > true' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['type' => true]),
+            'structure' => ['errors' => ['type']],
+            'fragment' => ['errors' => ['type' => ['The type field must be a string.']]],
+        ],
+        'type > empty array' => [
+            'method' => 'PUT',
+            'route' => 'links.update',
+            'id' => 1,
+            'data' => array_merge(updatedLinkData, ['type' => []]),
+            'structure' => ['errors' => ['type']],
+            'fragment' => ['errors' => ['type' => ['The type field must be a string.']]],
+        ],
+    ]);
 });

@@ -14,238 +14,133 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > POST', function ($questionData = questionData) {
-    /**
-     * INDEX TESTS
-     */
-    $questionData['index'] = '';
-    test('index > empty', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['index']],
-        ['errors' => [
-            'index' => ['The index field is required.'],
-        ]]
-    ));
+describe('422 > POST', function (): void {
+    apiTestArray([
+        // INDEX TESTS
+        'index > empty' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['index' => '']),
+            'structure' => ['errors' => ['index']],
+            'fragment' => ['errors' => ['index' => ['The index field is required.']]],
+        ],
+        'index > string' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['index' => 'index']),
+            'structure' => ['errors' => ['index']],
+            'fragment' => ['errors' => ['index' => ['The index field must be an integer.']]],
+        ],
+        'index > false' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['index' => false]),
+            'structure' => ['errors' => ['index']],
+            'fragment' => ['errors' => ['index' => ['The index field must be an integer.']]],
+        ],
+        'index > empty array' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['index' => []]),
+            'structure' => ['errors' => ['index']],
+            'fragment' => ['errors' => ['index' => ['The index field is required.']]],
+        ],
 
-    $questionData['index'] = 'index';
-    test('index > string', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['index']],
-        ['errors' => [
-            'index' => ['The index field must be an integer.'],
-        ]]
-    ));
+        // CONTENT TESTS
+        'content > empty' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['content' => '']),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field is required.']]],
+        ],
+        'content > integer' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['content' => 1]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > false' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['content' => false]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > true' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['content' => true]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > empty array' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['content' => []]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field is required.']]],
+        ],
 
-    $questionData['index'] = false;
-    test('index > false', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['index']],
-        ['errors' => [
-            'index' => ['The index field must be an integer.'],
-        ]]
-    ));
+        // ANSWER TESTS
+        'answer > integer' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['answer' => 1]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > false' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['answer' => false]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > true' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['answer' => true]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > empty array' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['answer' => []]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field is required.']]],
+        ],
 
-    $questionData['index'] = [];
-    test('index > empty array', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['index']],
-        ['errors' => [
-            'index' => ['The index field is required.'],
-        ]]
-    ));
-
-    $questionData['index'] = questionData['index'];
-
-    /**
-     * CONTENT TESTS
-     */
-    $questionData['content'] = '';
-    test('content > empty', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => ['The content field is required.'],
-        ]]
-    ));
-
-    $questionData['content'] = 1;
-    test('content > integer', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['content'] = false;
-    test('content > false', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['content'] = true;
-    test('content > true', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['content'] = [];
-    test('content > empty array', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => ['The content field is required.'],
-        ]]
-    ));
-
-    $questionData['content'] = questionData['content'];
-
-    /**
-     * ANSWER TESTS
-     */
-    $questionData['answer'] = 1;
-    test('answer > integer', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['answer'] = false;
-    test('answer > false', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['answer'] = true;
-    test('answer > true', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $questionData['answer'] = [];
-    test('answer > empty array', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => ['The answer field is required.'],
-        ]]
-    ));
-
-    $questionData['answer'] = questionData['answer'];
-
-    /**
-     * CATEGORY TESTS
-     */
-    $questionData['category'] = 1;
-    test('category > integer', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $questionData['category'] = false;
-    test('category > false', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $questionData['category'] = true;
-    test('category > true', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $questionData['category'] = [];
-    test('category > empty array', apiTest(
-        'POST',
-        'questions.store',
-        422,
-        $questionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
+        // CATEGORY TESTS
+        'category > integer' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'POST',
+            'route' => 'questions.store',
+            'data' => array_merge(questionData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+    ]);
 });

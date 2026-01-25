@@ -14,345 +14,208 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedTechnologyData = updatedTechnologyData) {
-    /**
-     * LABEL TESTS
-     */
-    $updatedTechnologyData['label'] = '';
-    test('label > empty', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['label']],
-        ['errors' => [
-            'label' => ['The label field is required.'],
-        ]]
-    ));
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // LABEL TESTS
+        'label > empty' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['label' => '']),
+            'structure' => ['errors' => ['label']],
+            'fragment' => ['errors' => ['label' => ['The label field is required.']]],
+        ],
+        'label > integer' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['label' => 1]),
+            'structure' => ['errors' => ['label']],
+            'fragment' => ['errors' => ['label' => ['The label field must be a string.']]],
+        ],
+        'label > false' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['label' => false]),
+            'structure' => ['errors' => ['label']],
+            'fragment' => ['errors' => ['label' => ['The label field must be a string.']]],
+        ],
+        'label > true' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['label' => true]),
+            'structure' => ['errors' => ['label']],
+            'fragment' => ['errors' => ['label' => ['The label field must be a string.']]],
+        ],
+        'label > empty array' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['label' => []]),
+            'structure' => ['errors' => ['label']],
+            'fragment' => ['errors' => ['label' => ['The label field is required.']]],
+        ],
 
-    $updatedTechnologyData['label'] = 1;
-    test('label > integer', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['label']],
-        ['errors' => [
-            'label' => [
-                'The label field must be a string.',
-            ],
-        ]]
-    ));
+        // DESCRIPTION TESTS
+        'description > integer' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['description' => 1]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.', 'The description field must be at least 3 characters.']]],
+        ],
+        'description > too short' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['description' => 't']),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be at least 3 characters.']]],
+        ],
+        'description > false' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['description' => false]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.', 'The description field must be at least 3 characters.']]],
+        ],
+        'description > true' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['description' => true]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.', 'The description field must be at least 3 characters.']]],
+        ],
+        'description > empty array' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['description' => []]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.', 'The description field must be at least 3 characters.']]],
+        ],
 
-    $updatedTechnologyData['label'] = false;
-    test('label > false', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['label']],
-        ['errors' => [
-            'label' => [
-                'The label field must be a string.',
-            ],
-        ]]
-    ));
+        // HREF TESTS
+        'href > empty' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['href' => '']),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field is required.']]],
+        ],
+        'href > integer' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['href' => 1]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.']]],
+        ],
+        'href > false' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['href' => false]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.']]],
+        ],
+        'href > true' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['href' => true]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field must be a string.']]],
+        ],
+        'href > empty array' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['href' => []]),
+            'structure' => ['errors' => ['href']],
+            'fragment' => ['errors' => ['href' => ['The href field is required.']]],
+        ],
 
-    $updatedTechnologyData['label'] = true;
-    test('label > true', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['label']],
-        ['errors' => [
-            'label' => [
-                'The label field must be a string.',
-            ],
-        ]]
-    ));
+        // SRC TESTS
+        'src > empty' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['src' => '']),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field is required.']]],
+        ],
+        'src > integer' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['src' => 1]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.']]],
+        ],
+        'src > false' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['src' => false]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.']]],
+        ],
+        'src > true' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['src' => true]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.']]],
+        ],
+        'src > empty array' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['src' => []]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field is required.']]],
+        ],
 
-    $updatedTechnologyData['label'] = [];
-    test('label > empty array', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['label']],
-        ['errors' => [
-            'label' => ['The label field is required.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['label'] = updatedTechnologyData['label'];
-
-    /**
-     * DESCRIPTION TESTS
-     */
-    $updatedTechnologyData['description'] = 1;
-    test('description > integer', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-                'The description field must be at least 3 characters.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['description'] = 't';
-    test('description > too short', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => ['The description field must be at least 3 characters.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['description'] = false;
-    test('description > false', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-                'The description field must be at least 3 characters.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['description'] = true;
-    test('description > true', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-                'The description field must be at least 3 characters.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['description'] = [];
-    test('description > empty array', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-                'The description field must be at least 3 characters.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['description'] = updatedTechnologyData['description'];
-
-    /**
-     * HREF TESTS
-     */
-    $updatedTechnologyData['href'] = '';
-    test('href > empty', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => ['The href field is required.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['href'] = 1;
-    test('href > integer', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['href'] = false;
-    test('href > false', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['href'] = true;
-    test('href > true', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => [
-                'The href field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['href'] = [];
-    test('href > empty array', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['href']],
-        ['errors' => [
-            'href' => ['The href field is required.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['href'] = updatedTechnologyData['href'];
-
-    /**
-     * SRC TESTS
-     */
-    $updatedTechnologyData['src'] = '';
-    test('src > empty', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => ['The src field is required.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['src'] = 1;
-    test('src > integer', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['src'] = false;
-    test('src > false', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['src'] = true;
-    test('src > true', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => [
-                'The src field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedTechnologyData['src'] = [];
-    test('src > empty array', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => ['The src field is required.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['src'] = updatedTechnologyData['src'];
-
-    /**
-     * CATEGORY TESTS
-     */
-    $updatedTechnologyData['category'] = 1;
-    test('category > integer', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['category'] = false;
-    test('category > false', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['category'] = true;
-    test('category > true', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedTechnologyData['category'] = [];
-    test('category > empty array', apiTest(
-        'PUT',
-        'technologies.update',
-        422,
-        $updatedTechnologyData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
+        // CATEGORY TESTS
+        'category > integer' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'PUT',
+            'route' => 'technologies.update',
+            'id' => 1,
+            'data' => array_merge(updatedTechnologyData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+    ]);
 });

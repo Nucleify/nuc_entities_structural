@@ -8,75 +8,70 @@ uses()->group('card-api-401');
 uses()->group('api-401');
 
 describe('401', function (): void {
-    test('index api', apiTest(
-        'GET',
-        'cards.index',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('countByCreatedLastWeek api', apiTest(
-        'GET',
-        'cards.countByCreatedLastWeek',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('show api', apiTest(
-        'SHOW',
-        'cards.show',
-        401,
-        1,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('store api with data', apiTest(
-        'POST',
-        'cards.store',
-        401,
-        cardData,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('store api empty json', apiTest(
-        'POST',
-        'cards.store',
-        401,
-        [],
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('update api with data', apiTest(
-        'PUT',
-        'cards.update',
-        401,
-        cardData,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('update api empty json', apiTest(
-        'PUT',
-        'cards.update',
-        401,
-        [],
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
-
-    test('destroy api', apiTest(
-        'DELETE',
-        'cards.destroy',
-        401,
-        null,
-        ['message'],
-        ['message' => 'Unauthenticated.']
-    ));
+    apiTestArray([
+        'index api' => [
+            'method' => 'GET',
+            'route' => 'cards.index',
+            'status' => 401,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'countByCreatedLastWeek api' => [
+            'method' => 'GET',
+            'route' => 'cards.countByCreatedLastWeek',
+            'status' => 401,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'show api' => [
+            'method' => 'SHOW',
+            'route' => 'cards.show',
+            'status' => 401,
+            'id' => 1,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'store api with data' => [
+            'method' => 'POST',
+            'route' => 'cards.store',
+            'status' => 401,
+            'data' => cardData,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'store api empty json' => [
+            'method' => 'POST',
+            'route' => 'cards.store',
+            'status' => 401,
+            'data' => [],
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'update api with data' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'status' => 401,
+            'id' => 1,
+            'data' => cardData,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'update api empty json' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'status' => 401,
+            'id' => 1,
+            'data' => [],
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+        'destroy api' => [
+            'method' => 'DELETE',
+            'route' => 'cards.destroy',
+            'status' => 401,
+            'id' => 1,
+            'structure' => ['message'],
+            'fragment' => ['message' => 'Unauthenticated.'],
+        ],
+    ]);
 });

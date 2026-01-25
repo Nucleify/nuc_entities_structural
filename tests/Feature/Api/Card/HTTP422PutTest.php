@@ -14,224 +14,146 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedCardData = updatedCardData) {
-    /**
-     * SRC TESTS
-     */
-    $updatedCardData['src'] = '';
-    test('src > empty', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => ['The src field is required.'],
-        ]]
-    ));
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // SRC TESTS
+        'src > empty' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['src' => '']),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field is required.']]],
+        ],
+        'src > integer' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['src' => 12345]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.']]],
+        ],
+        'src > false' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['src' => false]),
+            'structure' => ['errors' => ['src']],
+            'fragment' => ['errors' => ['src' => ['The src field must be a string.']]],
+        ],
 
-    $updatedCardData['src'] = 12345;
-    test('src > integer', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => ['The src field must be a string.'],
-        ]]
-    ));
+        // TITLE TESTS
+        'title > empty' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['title' => '']),
+            'structure' => ['errors' => ['title']],
+            'fragment' => ['errors' => ['title' => ['The title field is required.']]],
+        ],
+        'title > integer' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['title' => 12345]),
+            'structure' => ['errors' => ['title']],
+            'fragment' => ['errors' => ['title' => ['The title field must be a string.']]],
+        ],
+        'title > false' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['title' => false]),
+            'structure' => ['errors' => ['title']],
+            'fragment' => ['errors' => ['title' => ['The title field must be a string.']]],
+        ],
 
-    $updatedCardData['src'] = false;
-    test('src > false', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['src']],
-        ['errors' => [
-            'src' => ['The src field must be a string.'],
-        ]]
-    ));
+        // DESCRIPTION TESTS
+        'description > empty' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['description' => '']),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field is required.']]],
+        ],
+        'description > integer' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['description' => 12345]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
 
-    $updatedCardData['src'] = updatedCardData['src'];
+        // CATEGORY TESTS
+        'category > integer' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
 
-    /**
-     * TITLE TESTS
-     */
-    $updatedCardData['title'] = '';
-    test('title > empty', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['title']],
-        ['errors' => [
-            'title' => ['The title field is required.'],
-        ]]
-    ));
+        // COMPONENT TESTS
+        'component > empty' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['component' => '']),
+            'structure' => ['errors' => ['component']],
+            'fragment' => ['errors' => ['component' => ['The component field is required.']]],
+        ],
+        'component > integer' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['component' => 12345]),
+            'structure' => ['errors' => ['component']],
+            'fragment' => ['errors' => ['component' => ['The component field must be a string.']]],
+        ],
 
-    $updatedCardData['title'] = 12345;
-    test('title > integer', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['title']],
-        ['errors' => [
-            'title' => ['The title field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['title'] = false;
-    test('title > false', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['title']],
-        ['errors' => [
-            'title' => ['The title field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['title'] = updatedCardData['title'];
-
-    /**
-     * DESCRIPTION TESTS
-     */
-    $updatedCardData['description'] = '';
-    test('description > empty', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => ['The description field is required.'],
-        ]]
-    ));
-
-    $updatedCardData['description'] = 12345;
-    test('description > integer', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => ['The description field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['description'] = updatedCardData['description'];
-
-    /**
-     * CATEGORY TESTS
-     */
-    $updatedCardData['category'] = 1;
-    test('category > integer', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['category'] = false;
-    test('category > false', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['category'] = true;
-    test('category > true', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['category'] = [];
-    test('category > empty array', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['category'] = updatedCardData['category'];
-
-    /**
-     * COMPONENT TESTS
-     */
-    $updatedCardData['component'] = '';
-    test('component > empty', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['component']],
-        ['errors' => [
-            'component' => ['The component field is required.'],
-        ]]
-    ));
-
-    $updatedCardData['component'] = 12345;
-    test('component > integer', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['component']],
-        ['errors' => [
-            'component' => ['The component field must be a string.'],
-        ]]
-    ));
-
-    $updatedCardData['component'] = updatedCardData['component'];
-
-    /**
-     * DISPLAY TESTS
-     */
-    $updatedCardData['display'] = 'string';
-    test('display > string', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['display']],
-        ['errors' => [
-            'display' => ['The display field must be true or false.'],
-        ]]
-    ));
-
-    $updatedCardData['display'] = [];
-    test('display > empty array', apiTest(
-        'PUT',
-        'cards.update',
-        422,
-        $updatedCardData,
-        ['errors' => ['display']],
-        ['errors' => [
-            'display' => ['The display field must be true or false.'],
-        ]]
-    ));
+        // DISPLAY TESTS
+        'display > string' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['display' => 'string']),
+            'structure' => ['errors' => ['display']],
+            'fragment' => ['errors' => ['display' => ['The display field must be true or false.']]],
+        ],
+        'display > empty array' => [
+            'method' => 'PUT',
+            'route' => 'cards.update',
+            'id' => 1,
+            'data' => array_merge(updatedCardData, ['display' => []]),
+            'structure' => ['errors' => ['display']],
+            'fragment' => ['errors' => ['display' => ['The display field must be true or false.']]],
+        ],
+    ]);
 });

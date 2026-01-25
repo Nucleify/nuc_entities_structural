@@ -15,63 +15,82 @@ beforeEach(function (): void {
 });
 
 describe('405 > Authorized', function (): void {
-    test('put > index api', function (): void {
-        $this->put(route('questions.index', 1))
-            ->assertStatus(405);
-    });
-
-    test('put json > index api', function (): void {
-        $this->putJson(route('questions.index', 1))
-            ->assertStatus(405);
-    });
-
-    test('delete > index api', function (): void {
-        $this->delete(route('questions.index', 1))
-            ->assertStatus(405);
-    });
-
-    test('delete json > index api', function (): void {
-        $this->deleteJson(route('questions.index', 1))
-            ->assertStatus(405);
-    });
-
-    test('post json > countByCreatedLastWeek api', function (): void {
-        $this->postJson(route('questions.countByCreatedLastWeek', 1))
-            ->assertStatus(405);
-    });
-
-    test('post > countByCreatedLastWeek api', function (): void {
-        $this->post(route('questions.countByCreatedLastWeek', 1))
-            ->assertStatus(405);
-    });
-
-    test('post json > show api', function (): void {
-        $this->postJson(route('questions.show', 1))
-            ->assertStatus(405);
-    });
-
-    test('put json > post api', function (): void {
-        $this->putJson(route('questions.store', 1))
-            ->assertStatus(405);
-    });
-
-    test('delete json > post api', function (): void {
-        $this->deleteJson(route('questions.store', 1))
-            ->assertStatus(405);
-    });
-
-    test('post json > update api', function (): void {
-        $this->postJson(route('questions.update', 1))
-            ->assertStatus(405);
-    });
-
-    test('post > delete api', function (): void {
-        $this->post(route('questions.destroy', 1))
-            ->assertStatus(405);
-    });
-
-    test('post json > delete api', function (): void {
-        $this->postJson(route('questions.destroy', 1))
-            ->assertStatus(405);
-    });
+    apiTestArray([
+        'put > index api' => [
+            'method' => 'PUT',
+            'route' => 'questions.index',
+            'status' => 405,
+            'id' => 1,
+            'json' => false,
+        ],
+        'put json > index api' => [
+            'method' => 'PUT',
+            'route' => 'questions.index',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'delete > index api' => [
+            'method' => 'DELETE',
+            'route' => 'questions.index',
+            'status' => 405,
+            'id' => 1,
+            'json' => false,
+        ],
+        'delete json > index api' => [
+            'method' => 'DELETE',
+            'route' => 'questions.index',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'post json > countByCreatedLastWeek api' => [
+            'method' => 'POST',
+            'route' => 'questions.countByCreatedLastWeek',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'post > countByCreatedLastWeek api' => [
+            'method' => 'POST',
+            'route' => 'questions.countByCreatedLastWeek',
+            'status' => 405,
+            'id' => 1,
+            'json' => false,
+        ],
+        'post json > show api' => [
+            'method' => 'POST',
+            'route' => 'questions.show',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'put json > post api' => [
+            'method' => 'PUT',
+            'route' => 'questions.store',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'delete json > post api' => [
+            'method' => 'DELETE',
+            'route' => 'questions.store',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'post json > update api' => [
+            'method' => 'POST',
+            'route' => 'questions.update',
+            'status' => 405,
+            'id' => 1,
+        ],
+        'post > delete api' => [
+            'method' => 'POST',
+            'route' => 'questions.destroy',
+            'status' => 405,
+            'id' => 1,
+            'json' => false,
+        ],
+        'post json > delete api' => [
+            'method' => 'POST',
+            'route' => 'questions.destroy',
+            'status' => 405,
+            'id' => 1,
+        ],
+    ]);
 });

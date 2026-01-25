@@ -14,262 +14,140 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > POST', function ($featureData = featureData) {
-    /**
-     * ICON TESTS
-     */
-    $featureData['icon'] = 1;
-    test('icon > integer', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
+describe('422 > POST', function (): void {
+    apiTestArray([
+        // ICON TESTS
+        'icon > integer' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['icon' => 1]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > false' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['icon' => false]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > true' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['icon' => true]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field must be a string.']]],
+        ],
+        'icon > empty array' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['icon' => []]),
+            'structure' => ['errors' => ['icon']],
+            'fragment' => ['errors' => ['icon' => ['The icon field is required.']]],
+        ],
 
-    $featureData['icon'] = false;
-    test('icon > false', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
+        // HEADER TESTS
+        'header > empty' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['header' => '']),
+            'structure' => ['errors' => ['header']],
+            'fragment' => ['errors' => ['header' => ['The header field is required.']]],
+        ],
+        'header > integer' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['header' => 1]),
+            'structure' => ['errors' => ['header']],
+            'fragment' => ['errors' => ['header' => ['The header field must be a string.']]],
+        ],
+        'header > false' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['header' => false]),
+            'structure' => ['errors' => ['header']],
+            'fragment' => ['errors' => ['header' => ['The header field must be a string.']]],
+        ],
+        'header > true' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['header' => true]),
+            'structure' => ['errors' => ['header']],
+            'fragment' => ['errors' => ['header' => ['The header field must be a string.']]],
+        ],
+        'header > empty array' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['header' => []]),
+            'structure' => ['errors' => ['header']],
+            'fragment' => ['errors' => ['header' => ['The header field is required.']]],
+        ],
 
-    $featureData['icon'] = true;
-    test('icon > true', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => [
-                'The icon field must be a string.',
-            ],
-        ]]
-    ));
+        // DESCRIPTION TESTS
+        'description > integer' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['description' => 1]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
+        'description > false' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['description' => false]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
+        'description > true' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['description' => true]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
+        'description > empty array' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['description' => []]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field is required.']]],
+        ],
 
-    $featureData['icon'] = [];
-    test('icon > empty array', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['icon']],
-        ['errors' => [
-            'icon' => ['The icon field is required.'],
-        ]]
-    ));
-
-    $featureData['icon'] = featureData['icon'];
-
-    /**
-     * HEADER TESTS
-     */
-    $featureData['header'] = '';
-    test('header > empty', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['header']],
-        ['errors' => [
-            'header' => ['The header field is required.'],
-        ]]
-    ));
-
-    $featureData['header'] = 1;
-    test('header > integer', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['header']],
-        ['errors' => [
-            'header' => [
-                'The header field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['header'] = false;
-    test('header > false', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['header']],
-        ['errors' => [
-            'header' => [
-                'The header field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['header'] = true;
-    test('header > true', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['header']],
-        ['errors' => [
-            'header' => [
-                'The header field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['header'] = [];
-    test('header > empty array', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['header']],
-        ['errors' => [
-            'header' => ['The header field is required.'],
-        ]]
-    ));
-
-    $featureData['header'] = featureData['header'];
-
-    /**
-     * DESCRIPTION TESTS
-     */
-    $featureData['description'] = 1;
-    test('description > integer', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['description'] = false;
-    test('description > false', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['description'] = true;
-    test('description > true', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => [
-                'The description field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['description'] = [];
-    test('description > empty array', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['description']],
-        ['errors' => [
-            'description' => ['The description field is required.'],
-        ]]
-    ));
-
-    $featureData['description'] = featureData['description'];
-
-    /**
-     * CATEGORY TESTS
-     */
-    $featureData['category'] = '';
-    test('content > empty', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field is required.'],
-        ]]
-    ));
-
-    $featureData['category'] = 1;
-    test('category > integer', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['category'] = false;
-    test('category > false', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['category'] = true;
-    test('category > true', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => [
-                'The category field must be a string.',
-            ],
-        ]]
-    ));
-
-    $featureData['category'] = [];
-    test('category > empty array', apiTest(
-        'POST',
-        'features.store',
-        422,
-        $featureData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field is required.'],
-        ]]
-    ));
+        // CATEGORY TESTS
+        'content > empty' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['category' => '']),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field is required.']]],
+        ],
+        'category > integer' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'POST',
+            'route' => 'features.store',
+            'data' => array_merge(featureData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field is required.']]],
+        ],
+    ]);
 });

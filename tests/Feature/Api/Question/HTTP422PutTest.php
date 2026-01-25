@@ -14,185 +14,116 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedQuestionData = updatedQuestionData) {
-    /**
-     * CONTENT TESTS
-     */
-    $updatedQuestionData['content'] = '';
-    test('content > empty', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => ['The content field is required.'],
-        ]]
-    ));
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // CONTENT TESTS
+        'content > empty' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['content' => '']),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field is required.']]],
+        ],
+        'content > integer' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['content' => 1]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > false' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['content' => false]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > true' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['content' => true]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field must be a string.']]],
+        ],
+        'content > empty array' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['content' => []]),
+            'structure' => ['errors' => ['content']],
+            'fragment' => ['errors' => ['content' => ['The content field is required.']]],
+        ],
 
-    $updatedQuestionData['content'] = 1;
-    test('content > integer', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
+        // ANSWER TESTS
+        'answer > integer' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['answer' => 1]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > false' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['answer' => false]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > true' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['answer' => true]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field must be a string.']]],
+        ],
+        'answer > empty array' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['answer' => []]),
+            'structure' => ['errors' => ['answer']],
+            'fragment' => ['errors' => ['answer' => ['The answer field is required.']]],
+        ],
 
-    $updatedQuestionData['content'] = false;
-    test('content > false', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedQuestionData['content'] = true;
-    test('content > true', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => [
-                'The content field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedQuestionData['content'] = [];
-    test('content > empty array', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['content']],
-        ['errors' => [
-            'content' => ['The content field is required.'],
-        ]]
-    ));
-
-    $updatedQuestionData['content'] = updatedQuestionData['content'];
-
-    /**
-     * ANSWER TESTS
-     */
-    $updatedQuestionData['answer'] = 1;
-    test('answer > integer', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedQuestionData['answer'] = false;
-    test('answer > false', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedQuestionData['answer'] = true;
-    test('answer > true', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => [
-                'The answer field must be a string.',
-            ],
-        ]]
-    ));
-
-    $updatedQuestionData['answer'] = [];
-    test('answer > empty array', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['answer']],
-        ['errors' => [
-            'answer' => ['The answer field is required.'],
-        ]]
-    ));
-
-    $updatedQuestionData['answer'] = updatedQuestionData['answer'];
-
-    /**
-     * CATEGORY TESTS
-     */
-    $updatedQuestionData['category'] = 1;
-    test('category > integer', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedQuestionData['category'] = false;
-    test('category > false', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedQuestionData['category'] = true;
-    test('category > true', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
-
-    $updatedQuestionData['category'] = [];
-    test('category > empty array', apiTest(
-        'PUT',
-        'questions.update',
-        422,
-        $updatedQuestionData,
-        ['errors' => ['category']],
-        ['errors' => [
-            'category' => ['The category field must be a string.'],
-        ]]
-    ));
+        // CATEGORY TESTS
+        'category > integer' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['category' => 1]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > empty array' => [
+            'method' => 'PUT',
+            'route' => 'questions.update',
+            'id' => 1,
+            'data' => array_merge(updatedQuestionData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+    ]);
 });
