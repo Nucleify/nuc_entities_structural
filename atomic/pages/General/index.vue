@@ -19,21 +19,6 @@
       :loading="!allLoaded"
     />
 
-    <nuc-card-dashboard
-      :data="cards"
-      :get-data="getAllCards"
-      :loading="!allLoaded"
-    />
-    <nuc-feature-dashboard
-      :data="features"
-      :get-data="getAllFeatures"
-      :loading="!allLoaded"
-    />
-    <nuc-link-dashboard
-      :data="links"
-      :get-data="getAllLinks"
-      :loading="!allLoaded"
-    />
     <nuc-question-dashboard
       :data="questions"
       :get-data="getAllQuestions"
@@ -49,37 +34,7 @@
 
 <script setup lang="ts">
 import type { TileInterface } from 'atomic'
-import {
-  cardRequests,
-  featureRequests,
-  linkRequests,
-  questionRequests,
-  technologyRequests,
-} from 'atomic'
-
-const {
-  results: cards,
-  createdLastWeek: cardsCreatedLastWeek,
-  loading: cardsLoading,
-  getAllCards,
-  getCountCardsByCreatedLastWeek,
-} = cardRequests()
-
-const {
-  results: features,
-  createdLastWeek: featuresCreatedLastWeek,
-  loading: featuresLoading,
-  getAllFeatures,
-  getCountFeaturesByCreatedLastWeek,
-} = featureRequests()
-
-const {
-  results: links,
-  createdLastWeek: linksCreatedLastWeek,
-  loading: linksLoading,
-  getAllLinks,
-  getCountLinksByCreatedLastWeek,
-} = linkRequests()
+import { questionRequests, technologyRequests } from 'atomic'
 
 const {
   results: questions,
@@ -98,12 +53,6 @@ const {
 } = technologyRequests()
 
 onMounted(() => {
-  getAllCards(true)
-  getCountCardsByCreatedLastWeek()
-  getAllFeatures(true)
-  getCountFeaturesByCreatedLastWeek()
-  getAllLinks(true)
-  getCountLinksByCreatedLastWeek()
   getAllQuestions(true)
   getCountQuestionsByCreatedLastWeek()
   getAllTechnologies(true)
@@ -113,27 +62,9 @@ onMounted(() => {
 const allLoaded: Ref<boolean> = ref(false)
 
 watch(
-  [
-    cardsLoading,
-    featuresLoading,
-    linksLoading,
-    questionsLoading,
-    technologiesLoading,
-  ],
-  ([
-    cardsLoading,
-    featuresLoading,
-    linksLoading,
-    questionsLoading,
-    technologiesLoading,
-  ]: [boolean, boolean, boolean, boolean, boolean]) => {
-    if (
-      !cardsLoading &&
-      !featuresLoading &&
-      !linksLoading &&
-      !questionsLoading &&
-      !technologiesLoading
-    ) {
+  [questionsLoading, technologiesLoading],
+  ([questionsLoading, technologiesLoading]: [boolean, boolean]) => {
+    if (!questionsLoading && !technologiesLoading) {
       setTimeout(() => {
         allLoaded.value = true
       }, 200)
@@ -142,24 +73,6 @@ watch(
 )
 
 const entities = computed<TileInterface[]>(() => [
-  {
-    href: '/structural/cards',
-    header: 'Cards',
-    count: cards.value?.length || 0,
-    icon: 'prime:stop',
-    countSecondary: cardsCreatedLastWeek.value,
-    textSecondary: 'this week',
-    adType: 'card',
-  },
-  {
-    href: '/structural/features',
-    header: 'Features',
-    count: features.value?.length || 0,
-    icon: 'prime:star',
-    countSecondary: featuresCreatedLastWeek.value,
-    textSecondary: 'this week',
-    adType: 'feature',
-  },
   {
     href: '/structural/questions',
     header: 'Questions',
@@ -177,15 +90,6 @@ const entities = computed<TileInterface[]>(() => [
     countSecondary: technologiesCreatedLastWeek.value,
     textSecondary: 'this week',
     adType: 'technology',
-  },
-  {
-    href: '/structural/links',
-    header: 'Links',
-    count: links.value?.length || 0,
-    icon: 'prime:link',
-    countSecondary: linksCreatedLastWeek.value,
-    textSecondary: 'this week',
-    adType: 'link',
   },
 ])
 </script>
