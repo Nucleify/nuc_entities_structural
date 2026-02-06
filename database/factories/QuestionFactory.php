@@ -17,14 +17,14 @@ class QuestionFactory extends Factory
      */
     public function definition(): array
     {
-        $category = $this->faker->randomElement(['home', 'about', 'services', 'other']);
+        $category = $this->faker->randomElement(['home', 'about', 'offer', 'services', 'other']);
 
         $data = [
             'index' => $this->faker->numberBetween(0, 100),
             'content' => $this->faker->sentence(),
             'answer' => $this->faker->sentence(10),
             'category' => $category,
-            'on_site' => in_array($category, ['home', 'about', 'services']),
+            'on_site' => in_array($category, ['home', 'about', 'offer', 'services']),
             'display' => $this->faker->boolean(),
             'created_at' => $this->faker->dateTimeBetween('-1 year')->format('Y-m-d'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year')->format('Y-m-d'),

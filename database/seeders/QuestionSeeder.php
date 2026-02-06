@@ -16,6 +16,7 @@ class QuestionSeeder extends Seeder
     {
         $aboutQuestions = require_once $this->path . 'About.php';
         $homeQuestions = require_once $this->path . 'Home.php';
+        $offerQuestions = require_once $this->path . 'Offer.php';
         $servicesQuestions = require_once $this->path . 'Services.php';
 
         foreach ($aboutQuestions as $question) {
@@ -28,6 +29,13 @@ class QuestionSeeder extends Seeder
         foreach ($homeQuestions as $question) {
             Question::factory()->create(array_merge($question, [
                 'category' => 'home',
+                'display' => true,
+            ]));
+        }
+
+        foreach ($offerQuestions as $question) {
+            Question::factory()->create(array_merge($question, [
+                'category' => 'offer',
                 'display' => true,
             ]));
         }
