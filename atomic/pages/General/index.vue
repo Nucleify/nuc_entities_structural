@@ -33,8 +33,13 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'nuxt/app'
+
 import type { TileInterface } from 'atomic'
 import { questionRequests, technologyRequests } from 'atomic'
+
+const route = useRoute()
+const lang = computed(() => (route.params.lang as string) || 'en')
 
 const {
   results: questions,
@@ -74,7 +79,7 @@ watch(
 
 const entities = computed<TileInterface[]>(() => [
   {
-    href: '/structural/questions',
+    href: `/${lang.value}/structural/questions`,
     header: 'Questions',
     count: questions.value?.length || 0,
     icon: 'prime:question',
@@ -83,7 +88,7 @@ const entities = computed<TileInterface[]>(() => [
     adType: 'question',
   },
   {
-    href: '/structural/technologies',
+    href: `/${lang.value}/structural/technologies`,
     header: 'Technologies',
     count: technologies.value?.length || 0,
     icon: 'prime:microchip-ai',
