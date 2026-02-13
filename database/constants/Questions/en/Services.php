@@ -19,6 +19,6 @@ return [
     ],
     [
         'content' => 'Can I create dynamic web pages with Nucleify?',
-        'answer' => 'Absolutely! Nucleify’s Page Builder lets you design and customize content-rich, dynamic pages easily, without advanced coding, for modular and responsive web applications.',
+        'answer' => "Absolutely! Nucleify's Page Builder lets you design and customize content-rich, dynamic pages easily, without advanced coding, for modular and responsive web applications.",
     ],
 ];

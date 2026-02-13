@@ -14,37 +14,21 @@ class QuestionSeeder extends Seeder
      */
     public function run(): void
     {
-        $aboutQuestions = require_once $this->path . 'About.php';
-        $homeQuestions = require_once $this->path . 'Home.php';
-        $offerQuestions = require_once $this->path . 'Offer.php';
-        $servicesQuestions = require_once $this->path . 'Services.php';
+        $languages = ['en', 'pl'];
+        $categories = ['about' => 'About', 'home' => 'Home', 'offer' => 'Offer', 'services' => 'Services'];
 
-        foreach ($aboutQuestions as $question) {
-            Question::factory()->create(array_merge($question, [
-                'category' => 'about',
-                'display' => true,
-            ]));
-        }
+        foreach ($languages as $lang) {
+            foreach ($categories as $category => $file) {
+                $questions = require $this->path . $lang . '/' . $file . '.php';
 
-        foreach ($homeQuestions as $question) {
-            Question::factory()->create(array_merge($question, [
-                'category' => 'home',
-                'display' => true,
-            ]));
-        }
-
-        foreach ($offerQuestions as $question) {
-            Question::factory()->create(array_merge($question, [
-                'category' => 'offer',
-                'display' => true,
-            ]));
-        }
-
-        foreach ($servicesQuestions as $question) {
-            Question::factory()->create(array_merge($question, [
-                'category' => 'services',
-                'display' => true,
-            ]));
+                foreach ($questions as $question) {
+                    Question::factory()->create(array_merge($question, [
+                        'category' => $category,
+                        'lang' => $lang,
+                        'display' => true,
+                    ]));
+                }
+            }
         }
     }
 }

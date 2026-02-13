@@ -72,6 +72,17 @@ class QuestionController extends Controller
         }
     }
 
+    public function getSiteQuestionsByLang(string $site, string $lang): JsonResponse
+    {
+        try {
+            $result = $this->service->getSiteQuestionsByLang($site, $lang);
+
+            return response()->json($result);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function show($id): JsonResponse
     {
         try {

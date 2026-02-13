@@ -17,6 +17,7 @@ export function questionRequests(
   const resultsByCategory: EntityResultsType<NucQuestionObjectInterface> = ref(
     []
   )
+  const resultsByLang: EntityResultsType<NucQuestionObjectInterface> = ref([])
   const resultsBySite: EntityResultsType<NucQuestionObjectInterface> = ref([])
   const createdLastWeek: EntityCountResultsType = ref(0)
 
@@ -72,6 +73,20 @@ export function questionRequests(
     })
   }
 
+  async function getSiteQuestionsByLang(
+    site: SiteType,
+    lang: string,
+    loading?: boolean
+  ): Promise<void> {
+    await apiHandle<NucQuestionObjectInterface[]>({
+      url: apiUrl() + `/questions/get-site-questions/${site}/${lang}`,
+      setLoading: loading ? setLoading : undefined,
+      onSuccess: (response: NucQuestionObjectInterface[]) => {
+        resultsByLang.value = response
+      },
+    })
+  }
+
   async function storeQuestion(
     data: NucQuestionObjectInterface,
     getData: () => Promise<void>
@@ -118,6 +133,7 @@ export function questionRequests(
   return {
     results,
     resultsByCategory,
+    resultsByLang,
     resultsBySite,
     createdLastWeek,
     loading,
@@ -125,6 +141,7 @@ export function questionRequests(
     getCountQuestionsByCreatedLastWeek,
     getQuestionsByCategory,
     getSiteQuestions,
+    getSiteQuestionsByLang,
     storeQuestion,
     editQuestion,
     deleteQuestion,

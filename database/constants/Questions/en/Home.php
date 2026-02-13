@@ -19,6 +19,10 @@ return [
     ],
     [
         'content' => 'Can I manage and create dynamic web pages?',
-        'answer' => 'Yes! Nucleify’s PageBuilder lets you design, manage, and customize web pages easily, giving you full control over your site’s content and layout.',
+        'answer' => "Yes! Nucleify's PageBuilder lets you design, manage, and customize web pages easily, giving you full control over your site's content and layout.",
+    ],
+    [
+        'content' => 'Can I request a custom plan?',
+        'answer' => 'Yes! If none of our standard plans fit your needs, we can create a custom plan tailored to your project. Just reach out to us via the contact form and we\'ll put together a personalized offer.',
     ],
 ];

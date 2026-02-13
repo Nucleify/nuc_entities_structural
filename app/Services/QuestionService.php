@@ -100,6 +100,27 @@ class QuestionService
     }
 
     /**
+     * @param string $site
+     * @param string $lang
+     *
+     * @return AnonymousResourceCollection
+     *
+     * @throws Exception
+     */
+    public function getSiteQuestionsByLang(string $site, string $lang): AnonymousResourceCollection
+    {
+        $this->defineUserData();
+
+        $result = $this->model::getByCategory($site)->where('lang', $lang)->get();
+
+        $name = $this->causer ? $this->causer->name : 'Guest';
+
+        $this->logger->logMessage($name . ' fetched questions by site: ' . $site . ', lang: ' . $lang . '.');
+
+        return QuestionResource::collection($result);
+    }
+
+    /**
      * @param int $id
      *
      * @return QuestionResource

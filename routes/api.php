@@ -5,8 +5,13 @@ use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function (): void {
-    Route::get('/questions/get-site-questions/{site}', [QuestionController::class, 'getSiteQuestions'])
-        ->name('questions.getSiteQuestions');
+    Route::prefix('questions')->controller(QuestionController::class)->group(function (): void {
+        Route::get('/get-site-questions/{site}', 'getSiteQuestions')
+            ->name('questions.getSiteQuestions');
+
+        Route::get('/get-site-questions/{site}/{lang}', 'getSiteQuestionsByLang')
+            ->name('questions.getSiteQuestionsByLang');
+    });
 
     Route::get('/technologies/get-site-technologies/{site}', [TechnologyController::class, 'getSiteTechnologies'])
         ->name('technologies.getSiteTechnologies');

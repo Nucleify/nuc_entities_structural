@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('content');
             $table->text('answer');
             $table->string('category')->nullable();
+            $table->string('lang', 2)->default('en');
             $table->boolean('on_site');
             $table->boolean('display');
             $table->timestamps();
