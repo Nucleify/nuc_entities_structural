@@ -3,26 +3,26 @@
 return [
     [
         'content' => 'Czym jest Nucleify?',
-        'answer' => 'Nucleify to wszechstronny modułowy framework do budowania i zarządzania aplikacjami webowymi. Łączy zarządzanie danymi, migrację, integrację oraz potężny PageBuilder do efektywnego tworzenia dynamicznych stron.',
+        'answer' => 'Nucleify pomaga Ci łatwo stworzyć własną stronę internetową. Niezależnie od tego, czy potrzebujesz strony dla swojej firmy, żeby pokazać swoją pracę, czy po prostu być online, ułatwiamy Ci to.',
     ],
     [
-        'content' => 'Jak mogę zintegrować go z moimi aplikacjami?',
-        'answer' => 'Nucleify oferuje dobrze udokumentowane API, które ułatwia bezproblemową integrację jego funkcji z istniejącymi aplikacjami webowymi.',
+        'content' => 'Czy muszę umieć programować?',
+        'answer' => 'Wcale nie! Nie potrzebujesz żadnych umiejętności technicznych. Tworzenie i edytowanie swojej strony jest tak proste jak korzystanie z edytora tekstu. Po prostu kliknij, wpisz i dodaj swoje zdjęcia - to takie proste.',
     ],
     [
-        'content' => 'Czy jest bezpieczny w użyciu?',
-        'answer' => 'Tak, Nucleify został zaprojektowany z solidnymi funkcjami bezpieczeństwa, w tym szyfrowaniem i kontrolą dostępu, zapewniając ochronę Twoich danych.',
+        'content' => 'Ile to kosztuje?',
+        'answer' => 'Mamy różne opcje cenowe, które dopasują się do Twojego budżetu. Możesz wybrać to, co dla Ciebie działa, a jeśli potrzebujesz czegoś specjalnego, po prostu daj nam znać, a coś wymyślimy.',
     ],
     [
-        'content' => 'Czy jest darmowy i open-source?',
-        'answer' => 'Oczywiście! Nucleify jest całkowicie darmowy i open-source, umożliwiając programistom i zespołom swobodne korzystanie, modyfikowanie i współtworzenie projektu.',
+        'content' => 'Jak szybko mogę otrzymać swoją stronę?',
+        'answer' => 'To zależy od tego, czego potrzebujesz, ale pracujemy szybko! W przypadku prostej strony możesz być online już za kilka dni. Będziemy Cię informować na każdym etapie, żebyś dokładnie wiedział, kiedy Twoja strona będzie gotowa.',
     ],
     [
-        'content' => 'Czy mogę zarządzać i tworzyć dynamiczne strony?',
-        'answer' => 'Tak! PageBuilder Nucleify pozwala projektować, zarządzać i dostosowywać strony internetowe, dając pełną kontrolę nad treścią i układem witryny.',
+        'content' => 'Czy mogę dostać specjalny plan tylko dla mnie?',
+        'answer' => 'Tak! Jeśli nasze standardowe plany nie pasują do tego, czego potrzebujesz, powiedz nam, czego szukasz, a stworzymy plan idealny dla Ciebie. Po prostu skontaktuj się z nami, a pomożemy.',
     ],
     [
-        'content' => 'Czy mogę zamówić indywidualny plan?',
-        'answer' => 'Tak! Jeśli żaden z naszych standardowych planów nie odpowiada Twoim potrzebom, możemy stworzyć plan dopasowany do Twojego projektu. Skontaktuj się z nami przez formularz kontaktowy, a przygotujemy spersonalizowaną ofertę.',
+        'content' => 'Czy moja strona jest bezpieczna?',
+        'answer' => 'Tak! Chronimy Twoją stronę tak samo, jak bank chroni Twoje pieniądze. Twoje informacje i dane Twoich odwiedzających są bezpieczne i chronione.',
     ],
 ];

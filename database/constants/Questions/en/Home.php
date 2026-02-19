@@ -3,26 +3,26 @@
 return [
     [
         'content' => 'What is Nucleify?',
-        'answer' => 'Nucleify is a versatile modular framework for building and managing web applications. It combines data management, migration, integration, and a powerful PageBuilder for creating dynamic pages efficiently.',
+        'answer' => 'Nucleify helps you create your own website easily. Whether you need a website for your business, to show your work, or just to be online, we make it simple for you.',
     ],
     [
-        'content' => 'How can I integrate it with my applications?',
-        'answer' => 'Nucleify provides a well-documented API, making it easy to integrate its features seamlessly with your existing web applications.',
+        'content' => 'Do I need to know how to code?',
+        'answer' => 'Not at all! You don\'t need any technical skills. Creating and editing your website is as easy as using a word processor. Just click, type, and add your photos - it\'s that simple.',
     ],
     [
-        'content' => 'Is it secure to use?',
-        'answer' => 'Yes, Nucleify is designed with robust security features including encryption and access control, ensuring your data stays safe.',
+        'content' => 'How much does it cost?',
+        'answer' => 'We have different price options to fit your budget. You can pick what works for you, and if you need something special, just let us know and we\'ll work something out.',
     ],
     [
-        'content' => 'Is it free and open-source?',
-        'answer' => 'Absolutely! Nucleify is completely free and open-source, allowing developers and teams to use, modify, and contribute to the project freely.',
+        'content' => 'How quickly can I get my website?',
+        'answer' => 'It depends on what you need, but we work fast! For a simple website, you could be online in just a few days. We\'ll keep you updated every step of the way so you know exactly when your site will be ready.',
     ],
     [
-        'content' => 'Can I manage and create dynamic web pages?',
-        'answer' => "Yes! Nucleify's PageBuilder lets you design, manage, and customize web pages easily, giving you full control over your site's content and layout.",
+        'content' => 'Can I get a special plan just for me?',
+        'answer' => 'Yes! If our regular plans don\'t fit what you need, tell us what you\'re looking for and we\'ll create a plan that\'s perfect for you. Just contact us and we\'ll help you out.',
     ],
     [
-        'content' => 'Can I request a custom plan?',
-        'answer' => 'Yes! If none of our standard plans fit your needs, we can create a custom plan tailored to your project. Just reach out to us via the contact form and we\'ll put together a personalized offer.',
+        'content' => 'Is my website safe?',
+        'answer' => 'Yes! We protect your website just like a bank protects your money. Your information and your visitors\' data are kept safe and secure.',
     ],
 ];
