@@ -2,27 +2,31 @@
 
 return [
     [
-        'content' => 'What is Nucleify?',
-        'answer' => 'Nucleify helps you create your own website easily. Whether you need a website for your business, to show your work, or just to be online, we make it simple for you.',
+        'content' => 'Will a website actually help me get more clients?',
+        'answer' => 'Yes - a well-designed website works as your online storefront and a 24/7 salesperson. We focus not only on great design, but also on building trust and encouraging visitors to contact you. Our goal is simple: your website should generate real results, not just look good.',
     ],
     [
-        'content' => 'Do I need to know how to code?',
-        'answer' => 'Not at all! You don\'t need any technical skills. Creating and editing your website is as easy as using a word processor. Just click, type, and add your photos - it\'s that simple.',
+        'content' => 'How much does a professional website really cost?',
+        'answer' => 'The cost depends on your needs, but the good news is - you don’t need to spend a fortune to have a professional online presence. We offer flexible packages tailored to small businesses and individuals just getting started. Tell us what you need and we’ll provide a clear quote - with no hidden fees.',
     ],
     [
-        'content' => 'How much does it cost?',
-        'answer' => 'We have different price options to fit your budget. You can pick what works for you, and if you need something special, just let us know and we\'ll work something out.',
+        'content' => 'What are the monthly costs? Are there any hidden fees?',
+        'answer' => 'We believe in full transparency. You’ll always know exactly what you’re paying for. No surprises, no hidden charges. Choose a plan that fits your budget, and we’ll explain everything clearly before we begin.',
     ],
     [
-        'content' => 'How quickly can I get my website?',
-        'answer' => 'It depends on what you need, but we work fast! For a simple website, you could be online in just a few days. We\'ll keep you updated every step of the way so you know exactly when your site will be ready.',
+        'content' => 'How quickly can my website go live?',
+        'answer' => 'For a simple website, you could be online within just a few days. We work efficiently and keep you updated at every stage. The faster we receive your materials, the faster your website can start working for your business.',
     ],
     [
-        'content' => 'Can I get a special plan just for me?',
-        'answer' => 'Yes! If our regular plans don\'t fit what you need, tell us what you\'re looking for and we\'ll create a plan that\'s perfect for you. Just contact us and we\'ll help you out.',
+        'content' => 'I’m not tech-savvy - will I be able to manage it?',
+        'answer' => 'Absolutely. You don’t need any coding or technical knowledge. We explain everything in simple terms and guide you through the process. If you prefer, we can also handle everything for you so you don’t have to worry about a thing.',
     ],
     [
-        'content' => 'Is my website safe?',
-        'answer' => 'Yes! We protect your website just like a bank protects your money. Your information and your visitors\' data are kept safe and secure.',
+        'content' => 'What if I want to make changes in the future?',
+        'answer' => 'Your website can grow along with your business. You can add new services, pages, or features at any time. We remain flexible and continue supporting you even after your site goes live.',
+    ],
+    [
+        'content' => 'Why should I choose you?',
+        'answer' => 'Because we focus on results. We build websites that create trust, attract clients, and help you sell. We care about design, performance, and security - but most importantly, we treat your business like it’s our own.',
     ],
 ];

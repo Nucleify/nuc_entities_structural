@@ -2,27 +2,31 @@
 
 return [
     [
-        'content' => 'Czym jest Nucleify?',
-        'answer' => 'Nucleify pomaga Ci łatwo stworzyć własną stronę internetową. Niezależnie od tego, czy potrzebujesz strony dla swojej firmy, żeby pokazać swoją pracę, czy po prostu być online, ułatwiamy Ci to.',
+        'content' => 'Czy strona internetowa faktycznie pomoże mi zdobyć klientów?',
+        'answer' => 'Tak - dobrze zaprojektowana strona to Twoja wizytówka i sprzedawca 24/7. Dbamy nie tylko o wygląd, ale też o to, żeby strona budziła zaufanie i zachęcała do kontaktu. Naszym celem jest to, żeby Twoja strona realnie zarabiała, a nie tylko “ładnie wyglądała”.',
     ],
     [
-        'content' => 'Czy muszę umieć programować?',
-        'answer' => 'Wcale nie! Nie potrzebujesz żadnych umiejętności technicznych. Tworzenie i edytowanie swojej strony jest tak proste jak korzystanie z edytora tekstu. Po prostu kliknij, wpisz i dodaj swoje zdjęcia - to takie proste.',
+        'content' => 'Ile naprawdę kosztuje profesjonalna strona internetowa?',
+        'answer' => 'Cena zależy od zakresu, ale dobra wiadomość jest taka: nie musisz wydawać fortuny, żeby mieć profesjonalną stronę. Mamy elastyczne pakiety dopasowane do małych firm i osób zaczynających. Powiedz nam, czego potrzebujesz, a przygotujemy konkretną wycenę - bez ukrytych kosztów.',
     ],
     [
-        'content' => 'Ile to kosztuje?',
-        'answer' => 'Mamy różne opcje cenowe, które dopasują się do Twojego budżetu. Możesz wybrać to, co dla Ciebie działa, a jeśli potrzebujesz czegoś specjalnego, po prostu daj nam znać, a coś wymyślimy.',
+        'content' => 'Ile zapłacę miesięcznie? Czy są jakieś ukryte opłaty?',
+        'answer' => 'Stawiamy na pełną przejrzystość. Otrzymujesz jasną informację, ile płacisz i za co. Żadnych niespodzianek ani ukrytych kosztów. Możesz wybrać plan dopasowany do budżetu, a my wszystko dokładnie wyjaśnimy przed startem.',
     ],
     [
-        'content' => 'Jak szybko mogę otrzymać swoją stronę?',
-        'answer' => 'To zależy od tego, czego potrzebujesz, ale pracujemy szybko! W przypadku prostej strony możesz być online już za kilka dni. Będziemy Cię informować na każdym etapie, żebyś dokładnie wiedział, kiedy Twoja strona będzie gotowa.',
+        'content' => 'Jak szybko moja strona może zacząć działać?',
+        'answer' => 'W przypadku prostych stron możesz być online nawet w kilka dni. Działamy sprawnie i na każdym etapie informujemy Cię o postępach. Im szybciej dostaniemy materiały, tym szybciej Twoja strona zacznie pracować na Twój biznes.',
     ],
     [
-        'content' => 'Czy mogę dostać specjalny plan tylko dla mnie?',
-        'answer' => 'Tak! Jeśli nasze standardowe plany nie pasują do tego, czego potrzebujesz, powiedz nam, czego szukasz, a stworzymy plan idealny dla Ciebie. Po prostu skontaktuj się z nami, a pomożemy.',
+        'content' => 'Nie znam się na technologii - czy dam sobie radę?',
+        'answer' => 'Oczywiście. Nie musisz znać się na kodowaniu ani technicznych sprawach. Wszystko tłumaczymy prostym językiem i pomagamy na każdym etapie. Możesz też zlecić nam pełną obsługę, jeśli nie chcesz zajmować się stroną samodzielnie.',
     ],
     [
-        'content' => 'Czy moja strona jest bezpieczna?',
-        'answer' => 'Tak! Chronimy Twoją stronę tak samo, jak bank chroni Twoje pieniądze. Twoje informacje i dane Twoich odwiedzających są bezpieczne i chronione.',
+        'content' => 'Co jeśli będę chciał coś zmienić w przyszłości?',
+        'answer' => 'Twoja strona może rozwijać się razem z Twoją firmą. W każdej chwili możesz dodać nowe usługi, podstrony czy funkcje. Jesteśmy elastyczni i wspieramy Cię także po uruchomieniu strony.',
+    ],
+    [
+        'content' => 'Dlaczego warto wybrać właśnie Was?',
+        'answer' => 'Bo skupiamy się na efektach. Tworzymy strony, które budują zaufanie, przyciągają klientów i pomagają sprzedawać. Dbamy o estetykę, szybkość działania i bezpieczeństwo. A przede wszystkim - traktujemy Twój biznes tak, jakby był naszym własnym.',
     ],
 ];
