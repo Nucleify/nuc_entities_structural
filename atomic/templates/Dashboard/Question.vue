@@ -6,8 +6,8 @@
       :open-dialog="openDialog"
       :tag="3"
       ad-type="question"
-      header-text="Manage Questions"
-      button-text="New Question"
+      :header-text="t('entity-question-manage')"
+      :button-text="t('entity-question-new')"
     />
 
     <nuc-dialog
@@ -30,11 +30,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import type { NucDashboardInterface } from 'atomic'
 import { questionRequests, useNucDialog, useQuestionFields } from 'atomic'
 
 const props = defineProps<NucDashboardInterface>()
+const { t } = useI18n()
 
 const {
   visibleShow,
@@ -56,7 +58,7 @@ const dialogs = computed(() => [
     action: 'show',
     visible: visibleShow.value,
     data: selectedObject.value,
-    cancelButtonLabel: 'Close',
+    cancelButtonLabel: t('common-close'),
     fields: showFields,
   },
   {
@@ -64,9 +66,9 @@ const dialogs = computed(() => [
     action: 'delete',
     visible: visibleDelete.value,
     selectedObject: selectedObject.value,
-    title: 'Delete question?',
-    confirmButtonLabel: 'Confirm',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-question-delete'),
+    confirmButtonLabel: t('common-confirm'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: deleteQuestion,
     getData: props.getData,
   },
@@ -74,9 +76,9 @@ const dialogs = computed(() => [
     entity: 'question',
     action: 'create',
     visible: visibleCreate.value,
-    title: 'Create new question',
-    confirmButtonLabel: 'Confirm',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-question-create'),
+    confirmButtonLabel: t('common-confirm'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: storeQuestion,
     getData: props.getData,
     fields: createAndEditFields,
@@ -86,9 +88,9 @@ const dialogs = computed(() => [
     action: 'edit',
     visible: visibleEdit.value,
     data: selectedObject.value,
-    title: 'Edit question',
-    confirmButtonLabel: 'Update',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-question-edit'),
+    confirmButtonLabel: t('common-update'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: editQuestion,
     getData: props.getData,
     fields: createAndEditFields,

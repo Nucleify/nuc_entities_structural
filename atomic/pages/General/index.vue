@@ -34,11 +34,13 @@
 
 <script setup lang="ts">
 import { useRoute } from 'nuxt/app'
+import { useI18n } from 'vue-i18n'
 
 import type { TileInterface } from 'atomic'
 import { questionRequests, technologyRequests } from 'atomic'
 
 const route = useRoute()
+const { t } = useI18n()
 const lang = computed(() => (route.params.lang as string) || 'en')
 
 const {
@@ -80,20 +82,20 @@ watch(
 const entities = computed<TileInterface[]>(() => [
   {
     href: `/${lang.value}/structural/questions`,
-    header: 'Questions',
+    header: t('admin-tile-questions'),
     count: questions.value?.length || 0,
     icon: 'prime:question',
     countSecondary: questionsCreatedLastWeek.value,
-    textSecondary: 'this week',
+    textSecondary: t('admin-tile-this-week'),
     adType: 'question',
   },
   {
     href: `/${lang.value}/structural/technologies`,
-    header: 'Technologies',
+    header: t('admin-tile-technologies'),
     count: technologies.value?.length || 0,
     icon: 'prime:microchip-ai',
     countSecondary: technologiesCreatedLastWeek.value,
-    textSecondary: 'this week',
+    textSecondary: t('admin-tile-this-week'),
     adType: 'technology',
   },
 ])

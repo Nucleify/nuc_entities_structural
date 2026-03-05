@@ -2,13 +2,13 @@ import type { EntityFieldInterface, UseFieldsInterface } from 'atomic'
 
 export function useQuestionFields(): UseFieldsInterface<EntityFieldInterface> {
   const fieldData: readonly [string, string, string][] = [
-    ['index', 'Index', 'input-text'],
-    ['content', 'Content', 'input-text'],
-    ['answer', 'Answer', 'textarea'],
-    ['category', 'Category', 'input-text'],
-    ['display', 'Display', 'select'],
-    ['updated_at', 'Updated At', ''],
-    ['created_at', 'Created At', ''],
+    ['index', 'field-index', 'input-text'],
+    ['content', 'field-content', 'input-text'],
+    ['answer', 'field-answer', 'textarea'],
+    ['category', 'field-category', 'input-text'],
+    ['display', 'field-display', 'select'],
+    ['updated_at', 'field-updated-at', ''],
+    ['created_at', 'field-created-at', ''],
   ] as const
 
   const displayOptions: readonly boolean[] = [true, false]
@@ -18,7 +18,7 @@ export function useQuestionFields(): UseFieldsInterface<EntityFieldInterface> {
     .map(([name, label, type]): EntityFieldInterface => {
       const props =
         name === 'display'
-          ? { options: displayOptions, placeholder: 'Display question on site' }
+          ? { options: displayOptions, placeholder: 'field-display-question' }
           : undefined
 
       return { name, label, type, props }

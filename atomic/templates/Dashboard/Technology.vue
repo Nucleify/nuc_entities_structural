@@ -6,8 +6,8 @@
       :open-dialog="openDialog"
       :tag="3"
       ad-type="technology"
-      header-text="Manage Technologies"
-      button-text="New Technology"
+      :header-text="t('entity-technology-manage')"
+      :button-text="t('entity-technology-new')"
     />
 
     <nuc-dialog
@@ -30,11 +30,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import type { NucDashboardInterface } from 'atomic'
 import { technologyRequests, useNucDialog, useTechnologyFields } from 'atomic'
 
 const props = defineProps<NucDashboardInterface>()
+const { t } = useI18n()
 
 const {
   visibleShow,
@@ -56,7 +58,7 @@ const dialogs = computed(() => [
     action: 'show',
     visible: visibleShow.value,
     data: selectedObject.value,
-    cancelButtonLabel: 'Close',
+    cancelButtonLabel: t('common-close'),
     fields: showFields,
   },
   {
@@ -64,9 +66,9 @@ const dialogs = computed(() => [
     action: 'delete',
     visible: visibleDelete.value,
     selectedObject: selectedObject.value,
-    title: 'Delete technology?',
-    confirmButtonLabel: 'Confirm',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-technology-delete'),
+    confirmButtonLabel: t('common-confirm'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: deleteTechnology,
     getData: props.getData,
   },
@@ -74,9 +76,9 @@ const dialogs = computed(() => [
     entity: 'technology',
     action: 'create',
     visible: visibleCreate.value,
-    title: 'Create new technology',
-    confirmButtonLabel: 'Confirm',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-technology-create'),
+    confirmButtonLabel: t('common-confirm'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: storeTechnology,
     getData: props.getData,
     fields: createAndEditFields,
@@ -86,9 +88,9 @@ const dialogs = computed(() => [
     action: 'edit',
     visible: visibleEdit.value,
     data: selectedObject.value,
-    title: 'Edit technology',
-    confirmButtonLabel: 'Update',
-    cancelButtonLabel: 'Cancel',
+    title: t('entity-technology-edit'),
+    confirmButtonLabel: t('common-update'),
+    cancelButtonLabel: t('common-cancel'),
     confirm: editTechnology,
     getData: props.getData,
     fields: createAndEditFields,

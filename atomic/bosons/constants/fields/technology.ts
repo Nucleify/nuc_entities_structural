@@ -2,14 +2,14 @@ import type { EntityFieldInterface, UseFieldsInterface } from 'atomic'
 
 export function useTechnologyFields(): UseFieldsInterface<EntityFieldInterface> {
   const fieldData: readonly [string, string, string][] = [
-    ['href', 'Href', 'input-text'],
-    ['src', 'Src', 'input-text'],
-    ['label', 'Label', 'input-text'],
-    ['description', 'Description', 'textarea'],
-    ['category', 'Category', 'input-text'],
-    ['display', 'Display', 'select'],
-    ['updated_at', 'Updated At', ''],
-    ['created_at', 'Created At', ''],
+    ['href', 'field-href', 'input-text'],
+    ['src', 'field-src', 'input-text'],
+    ['label', 'field-label', 'input-text'],
+    ['description', 'field-description', 'textarea'],
+    ['category', 'field-category', 'input-text'],
+    ['display', 'field-display', 'select'],
+    ['updated_at', 'field-updated-at', ''],
+    ['created_at', 'field-created-at', ''],
   ] as const
 
   const displayOptions: readonly boolean[] = [true, false]
@@ -21,7 +21,7 @@ export function useTechnologyFields(): UseFieldsInterface<EntityFieldInterface> 
         name === 'display'
           ? {
               options: displayOptions,
-              placeholder: 'Display technology on site',
+              placeholder: 'field-display-technology',
             }
           : undefined
 
