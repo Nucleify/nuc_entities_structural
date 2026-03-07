@@ -10,7 +10,7 @@ import type {
   LoadingRefType,
   NucQuestionObjectInterface,
   StoreEntityRequestType,
-} from 'atomic'
+} from 'nucleify'
 
 export interface NucQuestionRequestsInterface {
   results: EntityResultsType<NucQuestionObjectInterface>

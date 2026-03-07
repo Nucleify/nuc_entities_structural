@@ -1,4 +1,4 @@
-import type { NucQuestionObjectInterface } from 'atomic'
+import type { NucQuestionObjectInterface } from 'nucleify'
 
 export const mockQuestion: NucQuestionObjectInterface = {
   id: 999,

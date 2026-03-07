@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest'
 
-import * as atomic from 'atomic'
+import * as nucleify from 'nucleify'
 
 describe('technologyRequests', (): void => {
-  const { closeDialog } = atomic.useNucDialog()
-  const requests: atomic.NucTechnologyRequestsInterface =
-    atomic.technologyRequests(closeDialog)
-  const mockResponse = [atomic.mockTechnology]
+  const { closeDialog } = nucleify.useNucDialog()
+  const requests: nucleify.NucTechnologyRequestsInterface =
+    nucleify.technologyRequests(closeDialog)
+  const mockResponse = [nucleify.mockTechnology]
 
   beforeEach((): void => {
     vi.clearAllMocks()
-    atomic.mockGlobalFetch(vi, mockResponse)
+    nucleify.mockGlobalFetch(vi, mockResponse)
   })
 
   it('getAllTechnologies', async (): Promise<void> => {
@@ -25,7 +25,7 @@ describe('technologyRequests', (): void => {
   })
 
   it('storeTechnology', async (): Promise<void> => {
-    await requests.storeTechnology(atomic.mockTechnology)
+    await requests.storeTechnology(nucleify.mockTechnology)
     expect(
       (globalThis as unknown as { $fetch: Mock }).$fetch
     ).toHaveBeenCalledWith(
@@ -36,7 +36,7 @@ describe('technologyRequests', (): void => {
   })
 
   it('editTechnology', async (): Promise<void> => {
-    await requests.editTechnology(atomic.mockTechnology)
+    await requests.editTechnology(nucleify.mockTechnology)
     expect(
       (globalThis as unknown as { $fetch: Mock }).$fetch
     ).toHaveBeenCalledWith(
@@ -47,7 +47,7 @@ describe('technologyRequests', (): void => {
   })
 
   it('deleteTechnology', async (): Promise<void> => {
-    await requests.deleteTechnology(atomic.mockTechnology.id ?? 0)
+    await requests.deleteTechnology(nucleify.mockTechnology.id ?? 0)
     expect(
       (globalThis as unknown as { $fetch: Mock }).$fetch
     ).toHaveBeenCalledWith(

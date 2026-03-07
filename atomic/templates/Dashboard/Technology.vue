@@ -32,8 +32,8 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import type { NucDashboardInterface } from 'atomic'
-import { technologyRequests, useNucDialog, useTechnologyFields } from 'atomic'
+import type { NucDashboardInterface } from 'nucleify'
+import { technologyRequests, useNucDialog, useTechnologyFields } from 'nucleify'
 
 const props = defineProps<NucDashboardInterface>()
 const { t } = useI18n()

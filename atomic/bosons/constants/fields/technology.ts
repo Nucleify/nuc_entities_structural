@@ -1,4 +1,4 @@
-import type { EntityFieldInterface, UseFieldsInterface } from 'atomic'
+import type { EntityFieldInterface, UseFieldsInterface } from 'nucleify'
 
 export function useTechnologyFields(): UseFieldsInterface<EntityFieldInterface> {
   const fieldData: readonly [string, string, string][] = [

@@ -7,8 +7,8 @@ import type {
   NucTechnologyObjectInterface,
   NucTechnologyRequestsInterface,
   UseLoadingInterface,
-} from 'atomic'
-import { apiHandle, useApiSuccess, useLoading } from 'atomic'
+} from 'nucleify'
+import { apiHandle, useApiSuccess, useLoading } from 'nucleify'
 
 export function technologyRequests(
   close?: CloseDialogType
