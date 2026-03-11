@@ -92,12 +92,6 @@ return [
         'src' => 'pest.svg',
     ],
     [
-        'label' => 'Storybook',
-        'description' => 'A tool for building, testing, and documenting user interface components in isolation, supporting various frontend frameworks.',
-        'href' => 'https://storybook.js.org/',
-        'src' => 'storybook.svg',
-    ],
-    [
         'label' => 'Cypress',
         'description' => 'An end-to-end testing framework for web applications. It allows fast and easy writing of user interface tests in real browsers.',
         'href' => 'https://www.cypress.io/',
