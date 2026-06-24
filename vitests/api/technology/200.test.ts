@@ -15,9 +15,7 @@ describe('technologyRequests', (): void => {
 
   it('getAllTechnologies', async (): Promise<void> => {
     await requests.getAllTechnologies()
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('technologies'),
       expect.objectContaining({ method: 'GET' })
     )
@@ -26,9 +24,7 @@ describe('technologyRequests', (): void => {
 
   it('storeTechnology', async (): Promise<void> => {
     await requests.storeTechnology(nucleify.mockTechnology)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('technologies'),
       expect.objectContaining({ method: 'POST' })
     )
@@ -37,9 +33,7 @@ describe('technologyRequests', (): void => {
 
   it('editTechnology', async (): Promise<void> => {
     await requests.editTechnology(nucleify.mockTechnology)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('technologies'),
       expect.objectContaining({ method: 'PUT' })
     )
@@ -48,9 +42,7 @@ describe('technologyRequests', (): void => {
 
   it('deleteTechnology', async (): Promise<void> => {
     await requests.deleteTechnology(nucleify.mockTechnology.id ?? 0)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('technologies'),
       expect.objectContaining({ method: 'DELETE' })
     )

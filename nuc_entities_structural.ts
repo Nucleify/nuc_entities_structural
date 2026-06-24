@@ -6,7 +6,7 @@ import {
   NucStructuralPage,
   NucTechnologyDashboard,
   NucTechnologyPage,
-} from './atomic'
+} from 'nucleify'
 
 export function registerNucEntitiesStructural(app: App<Element>): void {
   app

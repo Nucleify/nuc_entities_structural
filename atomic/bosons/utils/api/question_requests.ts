@@ -1,60 +1,59 @@
-import { ref } from 'vue'
+'use client'
 
 import type {
+  AppFramework,
   CloseDialogType,
-  EntityCountResultsType,
-  EntityResultsType,
   NucQuestionObjectInterface,
   NucQuestionRequestsInterface,
   UseLoadingInterface,
 } from 'nucleify'
-import { apiHandle, useApiSuccess, useLoading } from 'nucleify'
+import {
+  apiHandle,
+  createEntityCollectionState,
+  createEntityRequestState,
+  createEntityRequestsCore,
+  useApiSuccess,
+  useLoading,
+} from 'nucleify'
+
+const QUESTIONS_URL = '/questions'
 
 export function questionRequests(
-  close?: CloseDialogType
+  close?: CloseDialogType,
+  framework: AppFramework = 'nuxt'
 ): NucQuestionRequestsInterface {
-  const results: EntityResultsType<NucQuestionObjectInterface> = ref([])
-  const resultsByCategory: EntityResultsType<NucQuestionObjectInterface> = ref(
-    []
-  )
-  const resultsByLang: EntityResultsType<NucQuestionObjectInterface> = ref([])
-  const resultsBySite: EntityResultsType<NucQuestionObjectInterface> = ref([])
-  const createdLastWeek: EntityCountResultsType = ref(0)
+  const { results, createdLastWeek, setResults, setCreatedLastWeek } =
+    createEntityRequestState<NucQuestionObjectInterface>(framework)
+
+  const { items: resultsByCategory, setItems: setResultsByCategory } =
+    createEntityCollectionState<NucQuestionObjectInterface>(framework)
+  const { items: resultsByLang, setItems: setResultsByLang } =
+    createEntityCollectionState<NucQuestionObjectInterface>(framework)
+  const { items: resultsBySite, setItems: setResultsBySite } =
+    createEntityCollectionState<NucQuestionObjectInterface>(framework)
 
   const { loading, setLoading }: UseLoadingInterface = useLoading()
   const { apiSuccess } = useApiSuccess()
 
-  async function getAllQuestions(loading?: boolean): Promise<void> {
-    await apiHandle<NucQuestionObjectInterface[]>({
-      url: apiUrl() + '/questions',
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucQuestionObjectInterface[]) => {
-        results.value = response
-      },
+  const { getAll, getCountByCreatedLastWeek, store, edit, remove } =
+    createEntityRequestsCore<NucQuestionObjectInterface>({
+      baseUrl: QUESTIONS_URL,
+      close,
+      apiSuccess,
+      setResults,
+      setCreatedLastWeek,
+      setLoading,
     })
-  }
-
-  async function getCountQuestionsByCreatedLastWeek(
-    loading?: boolean
-  ): Promise<void> {
-    await apiHandle<number>({
-      url: apiUrl() + '/questions/count-by-created-last-week',
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: number) => {
-        createdLastWeek.value = response
-      },
-    })
-  }
 
   async function getQuestionsByCategory(
     category: string,
-    loading?: boolean
+    showLoading?: boolean
   ): Promise<void> {
     await apiHandle<NucQuestionObjectInterface[]>({
-      url: apiUrl() + `/questions/get-by-category/${category}`,
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucQuestionObjectInterface[]) => {
-        resultsByCategory.value = response
+      url: `${QUESTIONS_URL}/get-by-category/${category}`,
+      setLoading: showLoading ? setLoading : undefined,
+      onSuccess: (response) => {
+        setResultsByCategory(response)
         apiSuccess(response)
       },
     })
@@ -62,71 +61,24 @@ export function questionRequests(
 
   async function getSiteQuestions(
     site: SiteType,
-    loading?: boolean
+    showLoading?: boolean
   ): Promise<void> {
     await apiHandle<NucQuestionObjectInterface[]>({
-      url: apiUrl() + `/questions/get-site-questions/${site}`,
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (data: NucQuestionObjectInterface[]) => {
-        resultsBySite.value = data
-      },
+      url: `${QUESTIONS_URL}/get-site-questions/${site}`,
+      setLoading: showLoading ? setLoading : undefined,
+      onSuccess: setResultsBySite,
     })
   }
 
   async function getSiteQuestionsByLang(
     site: SiteType,
     lang: string,
-    loading?: boolean
+    showLoading?: boolean
   ): Promise<void> {
     await apiHandle<NucQuestionObjectInterface[]>({
-      url: apiUrl() + `/questions/get-site-questions/${site}/${lang}`,
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucQuestionObjectInterface[]) => {
-        resultsByLang.value = response
-      },
-    })
-  }
-
-  async function storeQuestion(
-    data: NucQuestionObjectInterface,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucQuestionObjectInterface>({
-      url: apiUrl() + '/questions',
-      method: 'POST',
-      data,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'create')
-      },
-    })
-  }
-
-  async function editQuestion(
-    data: NucQuestionObjectInterface,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucQuestionObjectInterface>({
-      url: apiUrl() + '/questions',
-      method: 'PUT',
-      data,
-      id: data.id,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'edit')
-      },
-    })
-  }
-
-  async function deleteQuestion(
-    id: number,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucQuestionObjectInterface>({
-      url: apiUrl() + '/questions',
-      method: 'DELETE',
-      id,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'delete')
-      },
+      url: `${QUESTIONS_URL}/get-site-questions/${site}/${lang}`,
+      setLoading: showLoading ? setLoading : undefined,
+      onSuccess: setResultsByLang,
     })
   }
 
@@ -137,13 +89,13 @@ export function questionRequests(
     resultsBySite,
     createdLastWeek,
     loading,
-    getAllQuestions,
-    getCountQuestionsByCreatedLastWeek,
+    getAllQuestions: getAll,
+    getCountQuestionsByCreatedLastWeek: getCountByCreatedLastWeek,
     getQuestionsByCategory,
     getSiteQuestions,
     getSiteQuestionsByLang,
-    storeQuestion,
-    editQuestion,
-    deleteQuestion,
+    storeQuestion: store,
+    editQuestion: edit,
+    deleteQuestion: remove,
   }
 }

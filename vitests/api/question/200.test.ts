@@ -15,9 +15,7 @@ describe('questionRequests', (): void => {
 
   it('getAllQuestions', async (): Promise<void> => {
     await requests.getAllQuestions()
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('questions'),
       expect.objectContaining({ method: 'GET' })
     )
@@ -26,9 +24,7 @@ describe('questionRequests', (): void => {
 
   it('getCountQuestionsByCreatedLastWeek', async (): Promise<void> => {
     await requests.getCountQuestionsByCreatedLastWeek()
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('questions/count-by-created-last-week'),
       expect.objectContaining({ method: 'GET' })
     )
@@ -37,9 +33,7 @@ describe('questionRequests', (): void => {
 
   it('storeQuestion', async (): Promise<void> => {
     await requests.storeQuestion(nucleify.mockQuestion)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('questions'),
       expect.objectContaining({ method: 'POST' })
     )
@@ -48,9 +42,7 @@ describe('questionRequests', (): void => {
 
   it('editQuestion', async (): Promise<void> => {
     await requests.editQuestion(nucleify.mockQuestion)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('questions'),
       expect.objectContaining({ method: 'PUT' })
     )
@@ -59,9 +51,7 @@ describe('questionRequests', (): void => {
 
   it('deleteQuestion', async (): Promise<void> => {
     await requests.deleteQuestion(nucleify.mockQuestion.id ?? 0)
-    expect(
-      (globalThis as unknown as { $fetch: Mock }).$fetch
-    ).toHaveBeenCalledWith(
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(
       expect.stringContaining('questions'),
       expect.objectContaining({ method: 'DELETE' })
     )

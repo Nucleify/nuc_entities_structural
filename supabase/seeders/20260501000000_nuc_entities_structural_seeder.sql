@@ -1,3 +1,6 @@
+truncate table public.questions restart identity;
+truncate table public.technologies restart identity;
+
 insert into public.questions (
   index, content, answer, category, lang, on_site, display, created_at, updated_at
 )

@@ -1,115 +1,67 @@
-import { ref } from 'vue'
+'use client'
 
 import type {
+  AppFramework,
   CloseDialogType,
-  EntityCountResultsType,
-  EntityResultsType,
   NucTechnologyObjectInterface,
   NucTechnologyRequestsInterface,
   UseLoadingInterface,
 } from 'nucleify'
-import { apiHandle, useApiSuccess, useLoading } from 'nucleify'
+import {
+  apiHandle,
+  createEntityCollectionState,
+  createEntityRequestState,
+  createEntityRequestsCore,
+  useApiSuccess,
+  useLoading,
+} from 'nucleify'
+
+const TECHNOLOGIES_URL = '/technologies'
 
 export function technologyRequests(
-  close?: CloseDialogType
+  close?: CloseDialogType,
+  framework: AppFramework = 'nuxt'
 ): NucTechnologyRequestsInterface {
-  const results: EntityResultsType<NucTechnologyObjectInterface> = ref([])
-  const resultsByCategory: EntityResultsType<NucTechnologyObjectInterface> =
-    ref([])
-  const resultsBySite: EntityResultsType<NucTechnologyObjectInterface> = ref([])
-  const createdLastWeek: EntityCountResultsType = ref(0)
+  const { results, createdLastWeek, setResults, setCreatedLastWeek } =
+    createEntityRequestState<NucTechnologyObjectInterface>(framework)
+
+  const { items: resultsByCategory, setItems: setResultsByCategory } =
+    createEntityCollectionState<NucTechnologyObjectInterface>(framework)
+  const { items: resultsBySite, setItems: setResultsBySite } =
+    createEntityCollectionState<NucTechnologyObjectInterface>(framework)
 
   const { loading, setLoading }: UseLoadingInterface = useLoading()
   const { apiSuccess } = useApiSuccess()
 
-  async function getAllTechnologies(loading?: boolean): Promise<void> {
-    await apiHandle<NucTechnologyObjectInterface[]>({
-      url: apiUrl() + '/technologies',
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucTechnologyObjectInterface[]) => {
-        results.value = response
-      },
+  const { getAll, getCountByCreatedLastWeek, store, edit, remove } =
+    createEntityRequestsCore<NucTechnologyObjectInterface>({
+      baseUrl: TECHNOLOGIES_URL,
+      close,
+      apiSuccess,
+      setResults,
+      setCreatedLastWeek,
+      setLoading,
     })
-  }
-
-  async function getCountTechnologiesByCreatedLastWeek(
-    loading?: boolean
-  ): Promise<void> {
-    await apiHandle<number>({
-      url: apiUrl() + '/technologies/count-by-created-last-week',
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: number) => {
-        createdLastWeek.value = response
-      },
-    })
-  }
 
   async function getTechnologiesByCategory(
     category: string,
-    loading?: boolean
+    showLoading?: boolean
   ): Promise<void> {
     await apiHandle<NucTechnologyObjectInterface[]>({
-      url: apiUrl() + `/technologies/get-by-category/${category}`,
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucTechnologyObjectInterface[]) => {
-        resultsByCategory.value = response
-      },
+      url: `${TECHNOLOGIES_URL}/get-by-category/${category}`,
+      setLoading: showLoading ? setLoading : undefined,
+      onSuccess: setResultsByCategory,
     })
   }
 
   async function getSiteTechnologies(
     site: SiteType,
-    loading?: boolean
+    showLoading?: boolean
   ): Promise<void> {
     await apiHandle<NucTechnologyObjectInterface[]>({
-      url: apiUrl() + `/technologies/get-site-technologies/${site}`,
-      setLoading: loading ? setLoading : undefined,
-      onSuccess: (response: NucTechnologyObjectInterface[]) => {
-        resultsBySite.value = response
-      },
-    })
-  }
-
-  async function storeTechnology(
-    data: NucTechnologyObjectInterface,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucTechnologyObjectInterface>({
-      url: apiUrl() + '/technologies',
-      method: 'POST',
-      data,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'create')
-      },
-    })
-  }
-
-  async function editTechnology(
-    data: NucTechnologyObjectInterface,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucTechnologyObjectInterface>({
-      url: apiUrl() + '/technologies',
-      method: 'PUT',
-      data,
-      id: data.id,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'edit')
-      },
-    })
-  }
-
-  async function deleteTechnology(
-    id: number,
-    getData: () => Promise<void>
-  ): Promise<void> {
-    await apiHandle<NucTechnologyObjectInterface>({
-      url: apiUrl() + '/technologies',
-      method: 'DELETE',
-      id,
-      onSuccess: (response) => {
-        apiSuccess(response, getData, close, 'delete')
-      },
+      url: `${TECHNOLOGIES_URL}/get-site-technologies/${site}`,
+      setLoading: showLoading ? setLoading : undefined,
+      onSuccess: setResultsBySite,
     })
   }
 
@@ -119,12 +71,12 @@ export function technologyRequests(
     resultsBySite,
     createdLastWeek,
     loading,
-    getAllTechnologies,
-    getCountTechnologiesByCreatedLastWeek,
+    getAllTechnologies: getAll,
+    getCountTechnologiesByCreatedLastWeek: getCountByCreatedLastWeek,
     getTechnologiesByCategory,
     getSiteTechnologies,
-    storeTechnology,
-    editTechnology,
-    deleteTechnology,
+    storeTechnology: store,
+    editTechnology: edit,
+    deleteTechnology: remove,
   }
 }

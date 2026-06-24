@@ -10,11 +10,8 @@
       type="bar"
       :direction="isMobile() ? 'horizontal' : 'vertical'"
       :data="{ 
-        card: cards, 
-        link: links, 
         question: questions, 
         technology: technologies, 
-        feature: features 
       }"
       :loading="!allLoaded"
     />
