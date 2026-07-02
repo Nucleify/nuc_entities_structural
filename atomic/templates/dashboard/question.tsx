@@ -151,7 +151,7 @@ export function NucQuestionDashboard({
         loading={loading}
         openDialog={openDialog}
         tag={3}
-        adType="question"
+        nuiType="question"
         headerText={t('entity-question-manage')}
         buttonText={t('entity-question-new')}
       />

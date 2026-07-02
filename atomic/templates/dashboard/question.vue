@@ -5,7 +5,7 @@
       :loading="loading"
       :open-dialog="openDialog"
       :tag="3"
-      ad-type="question"
+      nui-type="question"
       :header-text="t('entity-question-manage')"
       :button-text="t('entity-question-new')"
     />

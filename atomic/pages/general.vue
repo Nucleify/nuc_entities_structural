@@ -84,7 +84,7 @@ const entities = computed<TileInterface[]>(() => [
     icon: 'prime:question',
     countSecondary: questionsCreatedLastWeek.value,
     textSecondary: t('admin-tile-this-week'),
-    adType: 'question',
+    nuiType: 'question',
   },
   {
     href: `/${lang.value}/structural/technologies`,
@@ -93,7 +93,7 @@ const entities = computed<TileInterface[]>(() => [
     icon: 'prime:microchip-ai',
     countSecondary: technologiesCreatedLastWeek.value,
     textSecondary: t('admin-tile-this-week'),
-    adType: 'technology',
+    nuiType: 'technology',
   },
 ])
 </script>

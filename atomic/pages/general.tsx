@@ -69,7 +69,7 @@ export function NucStructuralPage(): React.JSX.Element {
         icon: 'prime:question',
         countSecondary: questionsCreatedLastWeek,
         textSecondary: t('admin-tile-this-week'),
-        adType: 'question',
+        nuiType: 'question',
       },
       {
         href: `/${lang}/structural/technologies`,
@@ -78,7 +78,7 @@ export function NucStructuralPage(): React.JSX.Element {
         icon: 'prime:microchip-ai',
         countSecondary: technologiesCreatedLastWeek,
         textSecondary: t('admin-tile-this-week'),
-        adType: 'technology',
+        nuiType: 'technology',
       },
     ],
     [

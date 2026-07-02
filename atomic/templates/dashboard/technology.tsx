@@ -149,7 +149,7 @@ export function NucTechnologyDashboard({
         loading={loading}
         openDialog={openDialog}
         tag={3}
-        adType="technology"
+        nuiType="technology"
         headerText={t('entity-technology-manage')}
         buttonText={t('entity-technology-new')}
       />

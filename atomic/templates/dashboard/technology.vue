@@ -5,7 +5,7 @@
       :loading="loading"
       :open-dialog="openDialog"
       :tag="3"
-      ad-type="technology"
+      nui-type="technology"
       :header-text="t('entity-technology-manage')"
       :button-text="t('entity-technology-new')"
     />
